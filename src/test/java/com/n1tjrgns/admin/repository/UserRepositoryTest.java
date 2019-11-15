@@ -34,8 +34,10 @@ public class UserRepositoryTest extends AdminApplicationTests {
     @Test
     public void read(){
         //제네릭 타입으로 받게되어있다.
-       Optional<User> user = userRepository.findById(1L);
+       //Optional<User> user = userRepository.findById(1L);
 
+        //쿼리 메소드 사용
+        Optional<User> user = userRepository.findByAccount("TestUser01");
        //Optional 객체가 감싸고 있는 값이 존재할 경우에만 실행 로직을 함수형 인자로 넘김
        //user.ifPresent(System.out::println);
         user.ifPresent(selectUser->{
