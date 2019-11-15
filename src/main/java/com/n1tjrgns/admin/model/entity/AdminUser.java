@@ -10,21 +10,34 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.time.LocalDateTime;
 
-// @Table(name="user") 테이블의 이름과 클래스명이 같으면 해당 어노테이션은 사용하지 않아도됨
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
-//유저
-public class User {
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+//어드민
+public class AdminUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String account;
-    private String email;
 
-    private String phoneNumber;
+    private String account;
+
+    private String password;
+
+    private String status;
+
+    private String role;
+
+    private LocalDateTime lastLoginAt;
+
+    private LocalDateTime passwordUpdatedAt;
+
+    private Integer loginFailCount;
+
+    private LocalDateTime registeredAt;
+
+    private LocalDateTime unregisteredAt;
 
     private LocalDateTime createdAt;
 
