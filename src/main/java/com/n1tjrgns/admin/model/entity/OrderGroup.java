@@ -15,7 +15,6 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Entity
 @Data
-//주문그룹
 public class OrderGroup {
 
     @Id
