@@ -24,13 +24,13 @@ public class OrderGroup {
 
     private String status;
 
-    private String orderType; // 주문의 형태 - 일괄 / 개별
+    private String orderType;   // 주문의 형태 - 일괄 / 개별
 
     private String revAddress;
 
     private String revName;
 
-    private String paymentType; //결재 종류 - 카드 / 무통장
+    private String paymentType; // 카드 / 현금
 
     private BigDecimal totalPrice;
 

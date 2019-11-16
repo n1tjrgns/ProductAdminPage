@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -18,13 +20,29 @@ public class Item {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String status;  // 등록 / 해지 / 검수중(등록대기중)
+
     private String name;
 
     private String title;
 
-    private Integer price;
-
     private String content;
+
+    private BigDecimal price;
+
+    private String brandName;
+
+    private LocalDateTime registeredAt;
+
+    private LocalDateTime unregisteredAt;
+
+    private LocalDateTime createdAt;
+
+    private String createdBy;
+
+    private LocalDateTime updatedAt;
+
+    private String updatedBy;
 
     private Long partnerId;
 
@@ -34,7 +52,7 @@ public class Item {
     // LAZY = SELECT * from item where id = ?
 
     // EAGER = 1:1 이나 1건만 존재할 때 사용
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "item")
-    private List<OrderDetail> orderDetailList;
+    /*@OneToMany(fetch = FetchType.LAZY, mappedBy = "item")
+    private List<OrderDetail> orderDetailList;*/
 
 }

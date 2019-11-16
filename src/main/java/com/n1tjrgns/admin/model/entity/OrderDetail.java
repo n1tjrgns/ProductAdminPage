@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
@@ -26,13 +27,15 @@ public class OrderDetail {
 
     private LocalDateTime arrivalDate;
 
+    private Integer quantity;
+
+    private BigDecimal total_price;
+
     private LocalDateTime createdAt;
 
     private String createdBy;
 
-    private Long userId;
 
-    private Long itemId;
 
     private Long orderGroupId;
 }
