@@ -28,7 +28,6 @@ public class Item {
 
     private Long partnerId;
 
-
     // FETCH 옵션
     // LAZY = 지연로딩, EAGER = 즉시로딩
     // 1:N
