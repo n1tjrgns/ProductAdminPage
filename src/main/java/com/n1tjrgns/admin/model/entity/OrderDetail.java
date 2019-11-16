@@ -4,11 +4,9 @@ package com.n1tjrgns.admin.model.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
@@ -16,7 +14,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-//주문상세
+@ToString(exclude = {"orderGroup","item"})
 public class OrderDetail {
 
     @Id
@@ -35,7 +33,16 @@ public class OrderDetail {
 
     private String createdBy;
 
-    private Long itemId;
+    //OrderDetail N : 1 Item
+    @ManyToOne
+    private Item item;
+    //private Long itemId;
 
-    private Long orderGroupId;
+    //OrderDetail N : 1 OrderGroup
+    //MappedBy의 면수명과 일치해야하는 점
+    @ManyToOne
+    private OrderGroup orderGroup;
+    //private Long orderGroupId;
+
+
 }

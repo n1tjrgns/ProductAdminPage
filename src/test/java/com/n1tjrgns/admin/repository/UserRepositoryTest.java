@@ -45,9 +45,32 @@ public class UserRepositoryTest extends AdminApplicationTests {
     }
 
     @Test
+    @Transactional
     public void read(){
-
+        //애초에 옵셔널로 해서 유효성을 확인해야 하지만 우선 if문으로 대체
         User user = userRepository.findFirstByPhoneNumberOrderByIdDesc("010-0000-0000");
+
+        if(user != null) {
+            user.getOrderGroupList().stream().forEach(orderGroup->{
+                System.out.println("---------------주문 묶음 ------------");
+                System.out.println("수령인 : " + orderGroup.getRevName());
+                System.out.println("수령지 : " + orderGroup.getRevAddress());
+                System.out.println("총금액 : " + orderGroup.getTotalPrice());
+                System.out.println("총수량: " + orderGroup.getTotalQuantity());
+
+                System.out.println("---------------주문 상세 ------------");
+
+                orderGroup.getOrderDetailList().forEach(orderDetail->{
+                    System.out.println("파트너사 이름 : " + orderDetail.getItem().getPartner().getName());
+                    System.out.println("파트너사 카테고리 : " + orderDetail.getItem().getPartner().getCategory());
+                    System.out.println("주문 상품 : " + orderDetail.getItem().getName());
+                    System.out.println("고객센터 번호 : " + orderDetail.getItem().getPartner().getCallCenter());
+                    System.out.println("주문 상태 : " + orderDetail.getStatus());
+                    System.out.println("도착 예정 일자 : " + orderDetail.getArrivalDate());
+
+                });
+            });
+        }
         Assert.assertNotNull(user);
     }
 

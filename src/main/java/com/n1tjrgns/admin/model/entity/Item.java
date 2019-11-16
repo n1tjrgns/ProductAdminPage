@@ -3,6 +3,7 @@ package com.n1tjrgns.admin.model.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -13,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-//아이템
+@ToString(exclude = {"orderDetailList","partner"})
 public class Item {
 
     @Id
@@ -44,7 +45,14 @@ public class Item {
 
     private String updatedBy;
 
-    private Long partnerId;
+    // Item은 N개 : Partner 는 1개
+    //private Long partnerId;
+    @ManyToOne
+    private Partner partner;
+
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "item")
+    private List<OrderDetail> orderDetailList;
 
     // FETCH 옵션
     // LAZY = 지연로딩, EAGER = 즉시로딩
