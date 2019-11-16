@@ -36,4 +36,5 @@ public class Item {
     // EAGER = 1:1 이나 1건만 존재할 때 사용
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "item")
     private List<OrderDetail> orderDetailList;
+
 }

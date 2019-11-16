@@ -35,5 +35,4 @@ public class OrderDetail {
     private Long itemId;
 
     private Long orderGroupId;
-
 }

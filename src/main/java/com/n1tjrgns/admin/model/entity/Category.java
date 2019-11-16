@@ -31,5 +31,4 @@ public class Category {
     private LocalDateTime updatedAt;
 
     private String updatedBy;
-
 }
