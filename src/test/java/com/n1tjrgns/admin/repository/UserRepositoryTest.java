@@ -18,34 +18,37 @@ public class UserRepositoryTest extends AdminApplicationTests {
 
     @Test
     public void create(){
-        System.out.println(userRepository);
+        String account = "Test01";
+        String password = "asdf";
+        String status = "REGISTERD";
+        String email = "Test01@gmail.com";
+        String phoneNumber = "010-0000-0000";
+        LocalDateTime registerAt = LocalDateTime.now();
+        LocalDateTime createdAt = LocalDateTime.now();
+        String createdBy = "AdminServer";
+
         User user = new User();
-        user.setAccount("TestUser01");
-        user.setEmail("TestUser01@gmail.com");
-        user.setPhoneNumber("010-1111-1111");
-        user.setCreatedAt(LocalDateTime.now());
-        user.setCreatedBy("admin");
-        System.out.println(user);
+        user.setAccount(account);
+        user.setPassword(password);
+        user.setStatus(status);
+        user.setEmail(email);
+        user.setPhoneNumber(phoneNumber);
+        user.setRegisteredAt(registerAt);
+        user.setCreatedAt(createdAt);
+        user.setCreatedBy(createdBy);
 
         User newUser = userRepository.save(user);
-        System.out.println("newUser : "+ newUser );
+
+        Assert.assertNotNull(newUser);
+
+
     }
 
     @Test
     public void read(){
-        //제네릭 타입으로 받게되어있다.
-       //Optional<User> user = userRepository.findById(1L);
 
-        //쿼리 메소드 사용
-        Optional<User> user = userRepository.findByAccount("TestUser01");
-       //Optional 객체가 감싸고 있는 값이 존재할 경우에만 실행 로직을 함수형 인자로 넘김
-       //user.ifPresent(System.out::println);
-        user.ifPresent(selectUser->{
-            System.out.println("user : " + selectUser);
-            System.out.println("user : " + selectUser.getEmail());
-        });
-
-
+        User user = userRepository.findFirstByPhoneNumberOrderByIdDesc("010-0000-0000");
+        Assert.assertNotNull(user);
     }
 
     @Test

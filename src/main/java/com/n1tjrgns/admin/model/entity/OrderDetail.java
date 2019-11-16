@@ -35,7 +35,7 @@ public class OrderDetail {
 
     private String createdBy;
 
-
+    private Long itemId;
 
     private Long orderGroupId;
 }
