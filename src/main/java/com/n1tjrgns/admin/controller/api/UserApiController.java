@@ -1,32 +1,47 @@
 package com.n1tjrgns.admin.controller.api;
 
+//사용자 api 비즈니스 로직 컨트롤러
+
 import com.n1tjrgns.admin.ifs.CrudInterface;
 import com.n1tjrgns.admin.model.network.Header;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.n1tjrgns.admin.model.network.request.UserApiRequest;
+import com.n1tjrgns.admin.model.network.response.UserApiResponse;
+import com.n1tjrgns.admin.repository.service.UserApiLogicService;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
+@Slf4j // 로깅
 @RestController
 @RequestMapping("/api/user")
-public class UserApiController implements CrudInterface {
+public class UserApiController implements CrudInterface<UserApiRequest, UserApiResponse> {
 
+    @Autowired
+    private UserApiLogicService userApiLogicService;
 
     @Override
-    public Header create() {
+    @PostMapping("") //api/user
+    public Header<UserApiResponse> create(@RequestBody Header<UserApiRequest> request) {
+
+        log.info("{}",request); //로깅
+        return userApiLogicService.create(request);
+    }
+
+    @Override
+    @GetMapping("{id}") //api/user/{id}
+    public Header<UserApiResponse> read(@PathVariable(name = "id") Long id) {
         return null;
     }
 
     @Override
-    public Header read(Long id) {
+    @PutMapping("") //api/user
+    public Header<UserApiResponse> update(@RequestBody Header<UserApiRequest> request) {
         return null;
     }
 
     @Override
-    public Header update() {
-        return null;
-    }
-
-    @Override
-    public Header delete(Long id) {
+    @DeleteMapping("{id}") //api/user/{id}
+    public Header delete(@PathVariable Long id) {
         return null;
     }
 }
