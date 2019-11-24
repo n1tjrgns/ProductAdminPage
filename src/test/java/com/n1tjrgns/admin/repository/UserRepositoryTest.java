@@ -41,6 +41,13 @@ public class UserRepositoryTest extends AdminApplicationTests {
 
         Assert.assertNotNull(newUser);
 
+        //빌더 패턴을 사용해 일일이 각각의 상황에 발성하는 생성자를 생성 할 필요가 없다.
+        User u = User.builder()
+                .account(account)
+                .password(password)
+                .status(status)
+                .email(email)
+                .build();
 
     }
 
@@ -49,6 +56,12 @@ public class UserRepositoryTest extends AdminApplicationTests {
     public void read(){
         //애초에 옵셔널로 해서 유효성을 확인해야 하지만 우선 if문으로 대체
         User user = userRepository.findFirstByPhoneNumberOrderByIdDesc("010-0000-0000");
+
+        //체인 어노테이션을 사용한 경우
+        /*user.setAccount();
+        user.setPassword();*/
+        // 위 처럼 계속 일일이 값을 받지 않아도 . 연산자로 한 번에 받을 수 있다.
+        //user.setAccount.setPassword(); 이렇게
 
         if(user != null) {
             user.getOrderGroupList().stream().forEach(orderGroup->{

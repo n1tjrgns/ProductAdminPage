@@ -1,9 +1,12 @@
 package com.n1tjrgns.admin.model.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
+import lombok.experimental.Accessors;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -15,6 +18,9 @@ import java.util.List;
 @Entity
 @Data
 @ToString(exclude = {"user","orderGroup"})
+@EntityListeners(AuditingEntityListener.class)
+@Builder
+@Accessors(chain = true)
 public class OrderGroup {
 
     @Id
@@ -39,12 +45,16 @@ public class OrderGroup {
 
     private LocalDateTime arrivalDate;
 
+    @CreatedDate
     private LocalDateTime createdAt;
 
+    @CreatedBy
     private String createdBy;
 
+    @LastModifiedDate
     private LocalDateTime updatedAt;
 
+    @LastModifiedBy
     private String updatedBy;
 
     //장바구니의 입장에서, 장바구니는 여러개지만 해당 장바구니를 가진 유저는 1명이므로 N : 1

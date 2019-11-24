@@ -1,9 +1,12 @@
 package com.n1tjrgns.admin.model.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
+import lombok.experimental.Accessors;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -18,6 +21,12 @@ import java.util.List;
 //oneTomany나 join 처럼 상호 참조시 lombok에서 toString을 계속 찍어 오버플로우가 발생한다.
 //제외시키는 방법
 @ToString(exclude = {"orderGroup"})
+@EntityListeners(AuditingEntityListener.class)
+
+//아래 두 개는 롬복 어노테이션
+@Builder //빌더패턴
+//체이닝을 사용하겠다는 어노테이션
+@Accessors(chain = true) //체인패턴
 public class User {
 
     @Id
@@ -38,12 +47,16 @@ public class User {
 
     private LocalDateTime unregisteredAt;
 
+    @CreatedDate
     private LocalDateTime createdAt;
 
+    @CreatedBy
     private String createdBy;
 
+    @LastModifiedDate
     private LocalDateTime updatedAt;
 
+    @LastModifiedBy
     private String updatedBy;
 
     //User 는 1명이지만, 장바구니는 여러개 가질 수 있음 1:N
