@@ -40,7 +40,7 @@ public class OrderGroupApiLogicService implements CrudInterface<OrderGroupApiReq
 
         OrderGroup newOrderGroup = orderGroupRepository.save(orderGroup);
 
-        return null;
+        return response(newOrderGroup);
     }
 
     @Override
