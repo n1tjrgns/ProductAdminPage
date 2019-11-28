@@ -75,12 +75,19 @@ public class ItemApiLogicService implements CrudInterface<ItemApiRequest, ItemAp
                 .map(newEntityItem -> itemRepository.save(newEntityItem))
                 .map(item -> response(item))
                 .orElseGet(()-> Header.ERROR("데이터없음"));
-
     }
 
     @Override
     public Header delete(Long id) {
-        return null;
+
+        return itemRepository.findById(id)
+                .map(item -> {
+                    //delete는 void를 리턴하기 때문에 중괄호로 한 번 더 묶어서 리턴
+                    itemRepository.delete(item);
+                        return Header.OK();
+                })
+                .orElseGet(()->Header.ERROR("데이터 없음"));
+
     }
 
     //공통 응답 메소드
