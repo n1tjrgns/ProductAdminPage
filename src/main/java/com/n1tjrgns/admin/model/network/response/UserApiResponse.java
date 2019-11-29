@@ -1,5 +1,6 @@
 package com.n1tjrgns.admin.model.network.response;
 
+import com.n1tjrgns.admin.model.enumclass.UserStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,7 +20,8 @@ public class UserApiResponse {
 
     private String password;
 
-    private String status;
+    //Enum 형태로 변경
+    private UserStatus status;
 
     private String email;
 

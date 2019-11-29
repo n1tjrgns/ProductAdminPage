@@ -1,5 +1,6 @@
 package com.n1tjrgns.admin.model.entity;
 
+import com.n1tjrgns.admin.model.enumclass.UserStatus;
 import lombok.*;
 import lombok.experimental.Accessors;
 import org.springframework.data.annotation.CreatedBy;
@@ -37,7 +38,9 @@ public class User {
 
     private String password;
 
-    private String status;  // REGISTERED / UNREGISTERED/ WAITING /
+    //status 변수 ENUM 형태로 리팩토링하기
+    @Enumerated(EnumType.STRING)
+    private UserStatus status;  // REGISTERED / UNREGISTERED/ WAITING /
 
     private String email;
 
