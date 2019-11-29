@@ -3,29 +3,26 @@ package com.n1tjrgns.admin.controller.api;
 //사용자 api 비즈니스 로직 컨트롤러
 
 import com.n1tjrgns.admin.controller.CrudController;
+import com.n1tjrgns.admin.model.entity.User;
 import com.n1tjrgns.admin.model.network.request.UserApiRequest;
 import com.n1tjrgns.admin.model.network.response.UserApiResponse;
-import com.n1tjrgns.admin.repository.service.UserApiLogicService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.annotation.PostConstruct;
 
 @Slf4j // 로깅
 @RestController
 @RequestMapping("/api/user")
 //public class UserApiController implements CrudInterface<UserApiRequest, UserApiResponse> {
-public class UserApiController extends CrudController<UserApiRequest, UserApiResponse> {
+public class UserApiController extends CrudController<UserApiRequest, UserApiResponse, User> {
 
-    @Autowired
+    /*@Autowired
     private UserApiLogicService userApiLogicService;
 
     @PostConstruct
     public void init(){
         this.baseService = userApiLogicService;
-    }
+    }*/
 
     /*@Override
     @PostMapping("") //api/user
