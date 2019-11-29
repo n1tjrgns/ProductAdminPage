@@ -2,6 +2,7 @@ package com.n1tjrgns.admin.repository.service;
 
 import com.n1tjrgns.admin.ifs.CrudInterface;
 import com.n1tjrgns.admin.model.entity.User;
+import com.n1tjrgns.admin.model.enumclass.UserStatus;
 import com.n1tjrgns.admin.model.network.Header;
 import com.n1tjrgns.admin.model.network.request.UserApiRequest;
 import com.n1tjrgns.admin.model.network.response.UserApiResponse;
@@ -34,7 +35,7 @@ public class UserApiLogicService implements CrudInterface<UserApiRequest, UserAp
         User user = User.builder()
                 .account(userApiRequest.getAccount())
                 .password(userApiRequest.getPassword())
-                .status("REGISTERED")
+                .status(UserStatus.REGISTERED) //ENUM 으로 Status 관리
                 .phoneNumber(userApiRequest.getPhoneNumber())
                 .email(userApiRequest.getEmail())
                 .registeredAt(LocalDateTime.now())

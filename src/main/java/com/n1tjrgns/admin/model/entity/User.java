@@ -39,6 +39,7 @@ public class User {
     private String password;
 
     //status 변수 ENUM 형태로 리팩토링하기
+    //고정적인 String 값에 대해서는 ENUM값으로 관리하는 것이 오타를 줄이는데도 도움이 되고 좋음
     @Enumerated(EnumType.STRING)
     private UserStatus status;  // REGISTERED / UNREGISTERED/ WAITING /
 

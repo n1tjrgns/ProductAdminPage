@@ -1,5 +1,6 @@
 package com.n1tjrgns.admin.model.entity;
 
+import com.n1tjrgns.admin.model.enumclass.ItemStatus;
 import lombok.*;
 import lombok.experimental.Accessors;
 import org.springframework.data.annotation.CreatedBy;
@@ -27,7 +28,9 @@ public class Item {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String status;  // 등록 / 해지 / 검수중(등록대기중)
+    //Enum값으로 리팩토링
+    @Enumerated(EnumType.STRING)
+    private ItemStatus status;  // 등록 / 해지 / 검수중(등록대기중)
 
     private String name;
 
