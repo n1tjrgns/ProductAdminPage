@@ -4,11 +4,14 @@ package com.n1tjrgns.admin.controller.api;
 
 import com.n1tjrgns.admin.controller.CrudController;
 import com.n1tjrgns.admin.model.entity.User;
+import com.n1tjrgns.admin.model.network.Header;
 import com.n1tjrgns.admin.model.network.request.UserApiRequest;
 import com.n1tjrgns.admin.model.network.response.UserApiResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @Slf4j // 로깅
 @RestController
@@ -16,6 +19,9 @@ import org.springframework.web.bind.annotation.RestController;
 //public class UserApiController implements CrudInterface<UserApiRequest, UserApiResponse> {
 public class UserApiController extends CrudController<UserApiRequest, UserApiResponse, User> {
 
+    public Header<List<UserApiResponse>> search(){
+
+    }
     /*@Autowired
     private UserApiLogicService userApiLogicService;
 
