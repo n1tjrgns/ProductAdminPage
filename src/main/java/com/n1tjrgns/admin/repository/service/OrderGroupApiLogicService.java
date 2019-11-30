@@ -96,7 +96,7 @@ public class OrderGroupApiLogicService extends BaseService<OrderGroupApiRequest,
     }
 
     //공통 response 작성
-    private Header<OrderGroupApiResponse> response(OrderGroup orderGroup){
+    public Header<OrderGroupApiResponse> response(OrderGroup orderGroup){
 
         OrderGroupApiResponse body = OrderGroupApiResponse.builder()
                 .id(orderGroup.getId())
