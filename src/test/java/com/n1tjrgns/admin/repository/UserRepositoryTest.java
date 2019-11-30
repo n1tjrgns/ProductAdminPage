@@ -3,6 +3,7 @@ package com.n1tjrgns.admin.repository;
 
 import com.n1tjrgns.admin.AdminApplicationTests;
 import com.n1tjrgns.admin.model.entity.User;
+import com.n1tjrgns.admin.model.enumclass.UserStatus;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ public class UserRepositoryTest extends AdminApplicationTests {
     public void create(){
         String account = "Test01";
         String password = "asdf";
-        String status = "REGISTERD";
+        UserStatus status = UserStatus.REGISTERED;
         String email = "Test01@gmail.com";
         String phoneNumber = "010-0000-0000";
         LocalDateTime registerAt = LocalDateTime.now();

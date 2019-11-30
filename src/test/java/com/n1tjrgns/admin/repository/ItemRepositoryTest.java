@@ -2,6 +2,7 @@ package com.n1tjrgns.admin.repository;
 
 import com.n1tjrgns.admin.AdminApplicationTests;
 import com.n1tjrgns.admin.model.entity.Item;
+import com.n1tjrgns.admin.model.enumclass.ItemStatus;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ public class ItemRepositoryTest extends AdminApplicationTests {
     @Test
     public void create(){
         Item item = new Item();
-        item.setStatus("UNREGISTERD");
+        item.setStatus(ItemStatus.UNREGISTERED);
         item.setName("맥북 pro");
         item.setPrice(BigDecimal.valueOf(3000000));
         item.setTitle("맥북 프로");
