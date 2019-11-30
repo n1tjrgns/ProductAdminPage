@@ -5,11 +5,19 @@ import com.n1tjrgns.admin.model.enumclass.UserStatus;
 import com.n1tjrgns.admin.model.network.Header;
 import com.n1tjrgns.admin.model.network.request.UserApiRequest;
 import com.n1tjrgns.admin.model.network.response.UserApiResponse;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 public class UserApiLogicService extends BaseService<UserApiRequest, UserApiResponse, User>{
 
@@ -20,7 +28,22 @@ public class UserApiLogicService extends BaseService<UserApiRequest, UserApiResp
     //2. user 생성
     //3. 생성된 데이터 -> UserApiResponse return
 
+    //@GetMapping("") //아이디를 기준으로 ASC 정렬하고 페이징은 10페이지 까지한다.
+    @Override
+    public Header<List<UserApiResponse>> search(@PageableDefault(sort="id", direction = Sort.Direction.ASC, size = 15) Pageable pageable){
+        log.info("{}",pageable);
 
+        Page<User> users = baseRepository.findAll(pageable);
+
+        List<UserApiResponse> userApiResponseList = users.stream()
+                .map(user -> response(user))
+                .collect(Collectors.toList());
+
+        //List<UserApiResponse
+
+        //Header<List<UserApiResponse>>
+        return Header.OK(userApiResponseList);
+    }
 
     @Override
     public Header<UserApiResponse> create(Header<UserApiRequest> request) {
@@ -43,7 +66,7 @@ public class UserApiLogicService extends BaseService<UserApiRequest, UserApiResp
         //3. 생성된 데이터 -> userApiResponse return
         //응답에 대한 리턴은 다른 부분에도 사용될 수 있기 때문에 별도 메소드 작성.
 
-        return response(newUser);
+        return Header.OK(response(newUser));
     }
 
     @Override
@@ -55,6 +78,7 @@ public class UserApiLogicService extends BaseService<UserApiRequest, UserApiResp
         //user -> userApiResponse return
         return optional
                 .map(user -> response(user))
+                .map(userApiResponse -> Header.OK(userApiResponse))
                 .orElseGet( //데이터가 없을 경우 예외처리
                         ()->Header.ERROR("데이터없음")
                 );
@@ -84,6 +108,7 @@ public class UserApiLogicService extends BaseService<UserApiRequest, UserApiResp
         })
                 .map(user -> baseRepository.save(user)) //update
                 .map(updateUser -> response(updateUser))    //userApiResponse
+                .map(userApiResponse -> Header.OK(userApiResponse))
                 .orElseGet(()->Header.ERROR("데이터없음"));
     }
 
@@ -102,7 +127,7 @@ public class UserApiLogicService extends BaseService<UserApiRequest, UserApiResp
         return null;
     }
 
-    private Header<UserApiResponse> response(User user){
+    private UserApiResponse response(User user){
         // user -> userApiResponse return
 
         UserApiResponse userApiResponse = UserApiResponse.builder()
@@ -117,6 +142,7 @@ public class UserApiLogicService extends BaseService<UserApiRequest, UserApiResp
                 .build();
 
         //Header + data return
-        return Header.OK(userApiResponse);
+        //Header.OK(userApiResponse);
+        return userApiResponse;
     }
 }

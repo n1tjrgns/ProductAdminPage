@@ -6,9 +6,11 @@ import com.n1tjrgns.admin.model.network.request.ItemApiRequest;
 import com.n1tjrgns.admin.model.network.response.ItemApiResponse;
 import com.n1tjrgns.admin.repository.PartnerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 //[리팩토링] Service 추상화하기 itemRepository -> baseRepository
@@ -106,5 +108,10 @@ public class ItemApiLogicService extends BaseService<ItemApiRequest, ItemApiResp
                 .build();
 
         return Header.OK(body);
+    }
+
+    @Override
+    public Header<List<ItemApiResponse>> search(Pageable pageable) {
+        return null;
     }
 }

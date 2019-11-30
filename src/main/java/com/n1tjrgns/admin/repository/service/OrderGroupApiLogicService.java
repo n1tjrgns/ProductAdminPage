@@ -6,9 +6,11 @@ import com.n1tjrgns.admin.model.network.request.OrderGroupApiRequest;
 import com.n1tjrgns.admin.model.network.response.OrderGroupApiResponse;
 import com.n1tjrgns.admin.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class OrderGroupApiLogicService extends BaseService<OrderGroupApiRequest, OrderGroupApiResponse, OrderGroup> {
@@ -112,5 +114,11 @@ public class OrderGroupApiLogicService extends BaseService<OrderGroupApiRequest,
 
         return Header.OK(body);
 
+    }
+
+
+    @Override
+    public Header<List<OrderGroupApiResponse>> search(Pageable pageable) {
+        return null;
     }
 }

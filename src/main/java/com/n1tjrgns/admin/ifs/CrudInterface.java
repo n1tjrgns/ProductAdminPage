@@ -1,6 +1,9 @@
 package com.n1tjrgns.admin.ifs;
 
 import com.n1tjrgns.admin.model.network.Header;
+import org.springframework.data.domain.Pageable;
+
+import java.util.List;
 
 //userapicontroller에서 crud에 대해 빼먹을 수 있으니 강제로 인터페이스에 정의하도록
 public interface CrudInterface<Req,Res> {
@@ -12,4 +15,7 @@ public interface CrudInterface<Req,Res> {
     Header<Res> update(Header<Req> request);
 
     Header delete(Long id);
+
+    Header<List<Res>> search(Pageable pageable);
+
 }
