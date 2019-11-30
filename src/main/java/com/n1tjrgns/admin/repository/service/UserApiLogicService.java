@@ -4,6 +4,7 @@ import com.n1tjrgns.admin.model.entity.OrderGroup;
 import com.n1tjrgns.admin.model.entity.User;
 import com.n1tjrgns.admin.model.enumclass.UserStatus;
 import com.n1tjrgns.admin.model.network.Header;
+import com.n1tjrgns.admin.model.network.Pagination;
 import com.n1tjrgns.admin.model.network.request.UserApiRequest;
 import com.n1tjrgns.admin.model.network.response.ItemApiResponse;
 import com.n1tjrgns.admin.model.network.response.OrderGroupApiResponse;
@@ -49,10 +50,14 @@ public class UserApiLogicService extends BaseService<UserApiRequest, UserApiResp
                 .map(user -> response(user))
                 .collect(Collectors.toList());
 
-        //List<UserApiResponse
-
+        Pagination pagination = Pagination.builder()
+                .totalPages(users.getTotalPages())
+                .totalElements(users.getTotalElements())
+                .currentPage(users.getNumber())
+                .currentElements(users.getNumberOfElements())
+                .build();
         //Header<List<UserApiResponse>>
-        return Header.OK(userApiResponseList);
+        return Header.OK(userApiResponseList,pagination);
     }
 
     @Override
